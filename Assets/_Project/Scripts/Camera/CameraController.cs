@@ -22,12 +22,11 @@ public class CameraController : MonoBehaviour
         _rotationY = Mathf.Clamp(_rotationY, _minY, _maxY);
 
         Quaternion rotation = Quaternion.Euler(_rotationY, _rotationX, 0);
-        Quaternion playerRotation = Quaternion.Euler(0, _rotationX, 0);
 
         Vector3 position = _player.position - rotation * Vector3.forward *0;
 
         transform.position = position;
         transform.rotation = rotation;
-        _player.rotation = playerRotation;
+        _player.rotation = rotation;
     }
 }
