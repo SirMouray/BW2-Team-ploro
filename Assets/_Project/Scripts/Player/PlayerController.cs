@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GroundCheck groundCheck;
+    [SerializeField] private Camera mainCamera;
     //[SerializeField] private AnimationManager animator;
 
     [Header("Movement Attributes")]
@@ -14,10 +15,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speedMultiplier = 2f;
     private float currentSpeed;
     private Vector3 move;
-
-    [Header("Rotation Attributes")]
-    [SerializeField] private float rotationSmoothness = 10f;
-    private Quaternion rotTarget;
 
     [Header("Jump Attributes")]
     [SerializeField] private float jumpHeight = 2f;
@@ -31,7 +28,10 @@ public class PlayerController : MonoBehaviour
             rb = GetComponent<Rigidbody>();
 
         if (groundCheck == null)
-            groundCheck = GetComponent<GroundCheck>();
+            groundCheck = GetComponentInChildren<GroundCheck>();
+
+        if (GetComponent<Camera>() == null)
+            mainCamera = Camera.main;
 
         //if (animator == null)
         //    animator = GetComponent<AnimationManager>();
@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
     {
         ApplyGravity();
         PlayerMovement();
-        PlayerRotation();
 
         //animator.SetJumpState(groundCheck.CheckIsGrounded());
         //animator.JumpAnimation();
@@ -58,23 +57,22 @@ public class PlayerController : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        move = new Vector3(horizontal, 0, vertical).normalized;
+
+        Vector3 verticalCam = mainCamera.transform.forward;
+        verticalCam.y = 0f;
+        Vector3 horizontalCam = mainCamera.transform.right;
+        horizontalCam.y = 0f;
+
+        move = (horizontal * horizontalCam +  vertical * verticalCam).normalized;
     }
 
     private void PlayerMovement()
     {
+        //Vector3 forward = mainCamera.transform.forward;
+        //transform.forward = forward;
         Vector3 velocity = move * currentSpeed;
         velocity.y = verticalVelocity;
         rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
-    }
-
-    private void PlayerRotation()
-    {
-        if (move != Vector3.zero)
-        {
-            rotTarget = Quaternion.LookRotation(move);
-            rb.MoveRotation(Quaternion.Slerp(rb.rotation, rotTarget, rotationSmoothness * Time.fixedDeltaTime));
-        }
     }
 
     private void SprintCheck()
