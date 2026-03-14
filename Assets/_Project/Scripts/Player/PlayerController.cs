@@ -77,9 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private void SprintCheck()
     {
-        currentSpeed = speed;
-        if (Input.GetButton("Fire3"))
-            currentSpeed *= speedMultiplier;
+        currentSpeed = Input.GetButton("Fire3") ? speed * speedMultiplier : speed;
     }
 
     private void ApplyGravity()
