@@ -3,11 +3,15 @@ using UnityEngine;
 public class EnemyDamageHandler : MonoBehaviour
 {
     [SerializeField] private HealthSystem healthSystem;
+    [SerializeField] private PlayerInventory inventory;
+    [SerializeField] private int coinValue;
 
     private void Awake()
     {
         if (healthSystem == null)
             healthSystem = GetComponent<HealthSystem>();
+        if (inventory == null)
+            inventory = GetComponent<PlayerInventory>();
     }
 
     private void OnEnable()
@@ -26,7 +30,7 @@ public class EnemyDamageHandler : MonoBehaviour
 
     public void HandleDeath()
     {
-        //drop coin
+        inventory.AddCoin(coinValue);
         //animazione
         GetComponent<Collider>().enabled = false;
         gameObject.SetActive(false);
