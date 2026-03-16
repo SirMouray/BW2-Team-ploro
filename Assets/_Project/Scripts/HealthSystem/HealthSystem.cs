@@ -28,6 +28,8 @@ public class HealthSystem : MonoBehaviour, IDamageable
         Debug.Log($"{gameObject.name} ha {currentHealth} hp");
     }
 
+    public int GetMaxHp() => maxHealth;
+
     public void TakeDamage(int damage)
     {
         if (isDead)

@@ -28,4 +28,11 @@ public class EnemyKamikaze : EnemyController
             _agent.SetDestination(_patrolPoints[_arrIndex].position);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        collision.collider.TryGetComponent<IDamageable>(out var life);
+        life.TakeDamage(_enemyInfo._damage);
+        _healthSystem.TakeDamage(_healthSystem.GetMaxHp());
+    }
 }

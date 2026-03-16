@@ -9,6 +9,7 @@ public abstract class EnemyController : MonoBehaviour
     protected EnemyState.State _currentState;
     protected NavMeshAgent _agent;
     protected Transform _player;
+    protected HealthSystem _healthSystem;
 
 
 
@@ -17,14 +18,11 @@ public abstract class EnemyController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         _agent.speed = _enemyInfo._speed;
+        _healthSystem = GetComponent<HealthSystem>();
     }
     protected bool CanSeePlayer()
     {
-        if (Vector3.Distance(transform.position, _player.position) > _enemyInfo._triggerDistance)
-        {
-            return false;
-        }
-        return true;
+        return Vector3.Distance(transform.position, _player.position) < _enemyInfo._triggerDistance;
     }
 
     protected void CheckPlayer()
