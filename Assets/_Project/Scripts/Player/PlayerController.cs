@@ -1,6 +1,6 @@
 using UnityEngine;
 
-//use gravity off - interpolate - collision su continuous
+//use gravity off - collision su continuous
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GroundCheck groundCheck;
     [SerializeField] private Camera mainCamera;
-    //[SerializeField] private AnimationManager animator;
 
     [Header("Movement Attributes")]
     [SerializeField] private float speed = 2f;
@@ -21,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float fallMultiplier = 2.5f;
     private float verticalVelocity = 0f;
+    private int jumpCounter = 0;
+    private bool canDoubleJump = false;
 
     private void Awake()
     {
@@ -32,9 +33,6 @@ public class PlayerController : MonoBehaviour
 
         if (GetComponent<Camera>() == null)
             mainCamera = Camera.main;
-
-        //if (animator == null)
-        //    animator = GetComponent<AnimationManager>();
     }
 
     private void Update()
@@ -48,10 +46,10 @@ public class PlayerController : MonoBehaviour
     {
         ApplyGravity();
         PlayerMovement();
-
-        //animator.SetJumpState(groundCheck.CheckIsGrounded());
-        //animator.JumpAnimation();
     }
+
+    public void SetSpeedMultiplier(float speed) => speedMultiplier *= speed;
+    public void SetDoubleJump(bool activate) => canDoubleJump = activate;
 
     private void PlayerInput()
     {
@@ -63,13 +61,11 @@ public class PlayerController : MonoBehaviour
         Vector3 horizontalCam = mainCamera.transform.right;
         horizontalCam.y = 0f;
 
-        move = (horizontal * horizontalCam +  vertical * verticalCam).normalized;
+        move = (horizontal * horizontalCam + vertical * verticalCam).normalized;
     }
 
     private void PlayerMovement()
     {
-        //Vector3 forward = mainCamera.transform.forward;
-        //transform.forward = forward;
         Vector3 velocity = move * currentSpeed;
         velocity.y = verticalVelocity;
         rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
@@ -82,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if (groundCheck.CheckIsGrounded() && verticalVelocity < 0f) 
+        if (groundCheck.CheckIsGrounded() && verticalVelocity < 0f)
             verticalVelocity = -2f; //se e' a terra mantienilo tale con valore minimo X (non si usa -9.81f perche' potrebbe causare compenetrazioni con il terreno)
         else                        //altrimenti applica la gravita' con fall multiplier se sta cadendo
         {
@@ -91,13 +87,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void JumpCheck()
+    public void JumpCheck()
     {
         if (Input.GetButtonDown("Jump") && groundCheck.CheckIsGrounded())
         {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            if (Input.GetButtonDown("Jump") && canDoubleJump && jumpCounter <= 1)
+            {
+                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                jumpCounter++;
+
+                if (groundCheck.CheckIsGrounded())
+                    jumpCounter = 0;
+            }
         }
-        //rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
-        //animator.TriggerJump();
     }
 }

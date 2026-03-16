@@ -9,6 +9,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
     [SerializeField] private bool fullHpOnStart = false;
     private int currentHealth;
     private bool isDead = false;
+    private bool isShielded = false;
 
     [Header("Event Settings")]
     [SerializeField] private UnityEvent<int, int> onHpChange;
@@ -28,12 +29,22 @@ public class HealthSystem : MonoBehaviour, IDamageable
         Debug.Log($"{gameObject.name} ha {currentHealth} hp");
     }
 
+    public void SetShieldStatus(bool status) => isShielded = status;
+
     public int GetMaxHp() => maxHealth;
+
+    public void AddMaxHp(int hp) => maxHealth += hp;
 
     public void TakeDamage(int damage)
     {
         if (isDead)
             return;
+
+        if (isShielded)
+        {
+            isShielded = false;
+            return;
+        }
 
         SetHp(currentHealth - damage);
 
