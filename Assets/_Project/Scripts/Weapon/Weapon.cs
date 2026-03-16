@@ -13,8 +13,7 @@ public class Weapon : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _weaponInfo._range))
         {
-            hit.collider.TryGetComponent<IDamageable>(out var life);
-            if (life != null)   //da chiedere
+            if(hit.collider.TryGetComponent<IDamageable>(out var life))
                 life.TakeDamage(_weaponInfo._damage);
         }
     }
