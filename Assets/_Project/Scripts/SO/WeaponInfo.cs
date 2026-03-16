@@ -6,6 +6,6 @@ using UnityEngine;
 public class WeaponInfo : ScriptableObject
 {
     public float _rateOfFire;
-    public float _damage;
+    public int _damage;
     public float _range;
 }

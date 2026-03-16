@@ -10,16 +10,14 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
-        Ray ray = _camera.ViewportPointToRay(new Vector3(0.5f,0.5f,0));
+        Ray ray = _camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Debug.DrawLine(ray.origin, ray.direction * _weaponInfo._range, Color.red);
         RaycastHit hit;
-        //Debug.DrawLine(ray.origin, ray.direction*_weaponInfo._range,Color.red);
-        if(Physics.Raycast(ray, out hit, _weaponInfo._range))
+        if (Physics.Raycast(ray, out hit, _weaponInfo._range))
         {
-            //Enemy enemy = hit.collider.GetComponent<Enemy>():
-            //if (enemy != null)
-            //{
-            //  funzione di take damage
-            //}
+            hit.collider.TryGetComponent<IDamageable>(out var life);
+            if (life != null)   //da chiedere
+                life.TakeDamage(_weaponInfo._damage);
         }
     }
 
