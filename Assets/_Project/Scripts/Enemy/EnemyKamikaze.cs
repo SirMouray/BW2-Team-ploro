@@ -34,7 +34,8 @@ public class EnemyKamikaze : EnemyController
         if(collision.collider.TryGetComponent<IDamageable>(out var life))
         {
             life.TakeDamage(_enemyInfo._damage);
-            _healthSystem.TakeDamage(_healthSystem.GetMaxHp());
+            //_healthSystem.TakeDamage(_healthSystem.GetMaxHp());
+            Deactive();
         }
     }
 }

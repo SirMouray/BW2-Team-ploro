@@ -52,6 +52,8 @@ public class HealthSystem : MonoBehaviour, IDamageable
         {
             isDead = true;
             onDeath?.Invoke();
+            if (this.GetComponent<EnemyController>())
+                this.GetComponent<EnemyController>().Deactive();
         }
     }
 

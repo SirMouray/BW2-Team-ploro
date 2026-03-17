@@ -5,36 +5,36 @@ using UnityEngine.Pool;
 
 public class ObjectPooling : MonoBehaviour
 {
-    [SerializeField] private Maps[] _objPrefab;
-    private IObjectPool<Maps> _objPool;
+    [SerializeField] private EnemyController _objPrefab;
+    private IObjectPool<EnemyController> _objPool;
     private bool _collectionCheck;
-    private int _poolCapacity = 5;
-    private int _poolMaxSize = 10;
+    private int _poolCapacity = 20;
+    private int _poolMaxSize = 50;
 
     private void Awake()
     {
-        _objPool = new ObjectPool<Maps>(Create, OnGetFromPool, OnRealeseToPool, OnDestroyPooledObj, _collectionCheck, _poolCapacity, _poolMaxSize);
+        _objPool = new ObjectPool<EnemyController>(Create, OnGetFromPool, OnRealeseToPool, OnDestroyPooledObj, _collectionCheck, _poolCapacity, _poolMaxSize);
     }
 
-    private Maps Create()
+    private EnemyController Create()
     {
-        Maps obj = Instantiate(_objPrefab[Random.Range(0, _objPrefab.Length)]);
+        EnemyController obj = Instantiate(_objPrefab);
         obj.gameObject.SetActive(false);
         obj.ObjPool = _objPool;
         return obj;
     }
 
-    private void OnGetFromPool(Maps pooledObj)
+    private void OnGetFromPool(EnemyController pooledObj)
     {
         pooledObj.gameObject.SetActive(true);
     }
 
-    private void OnRealeseToPool(Maps pooledObj)
+    private void OnRealeseToPool(EnemyController pooledObj)
     {
         pooledObj.gameObject.SetActive(false);
     }
 
-    private void OnDestroyPooledObj(Maps pooledObj)
+    private void OnDestroyPooledObj(EnemyController pooledObj)
     {
         Destroy(pooledObj.gameObject);
     }
@@ -43,9 +43,15 @@ public class ObjectPooling : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Maps mapsobj = _objPool.Get();
-            mapsobj.transform.SetPositionAndRotation(new Vector3(Random.Range(0, 20), Random.Range(0, 20)), Quaternion.identity);
-            mapsobj.Deactive();
+            EnemyController enemyObj = _objPool.Get();
+            enemyObj.transform.SetPositionAndRotation(new Vector3(Random.Range(0, 20), Random.Range(0, 20)), Quaternion.identity);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            EnemyController enemyObj = FindFirstObjectByType<EnemyController>();
+            enemyObj.Deactive();
         }
     }
 }

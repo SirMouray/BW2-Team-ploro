@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Pool;
 
 public abstract class EnemyController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public abstract class EnemyController : MonoBehaviour
     protected NavMeshAgent _agent;
     protected Transform _player;
     protected HealthSystem _healthSystem;
+
+    private IObjectPool<EnemyController> _objPool;
+    public IObjectPool<EnemyController> ObjPool { set => _objPool = value; }
 
 
 
@@ -47,6 +51,11 @@ public abstract class EnemyController : MonoBehaviour
                 Attack();
                 break;
         }
+    }
+
+    public void Deactive()
+    {
+        _objPool.Release(this);
     }
 
     protected abstract void Patrol();
