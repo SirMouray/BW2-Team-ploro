@@ -20,6 +20,7 @@ public class ObjectPooling : MonoBehaviour
     {
         EnemyController obj = Instantiate(_objPrefab);
         obj.gameObject.SetActive(false);
+        obj.transform.SetParent(transform);
         obj.ObjPool = _objPool;
         return obj;
     }
@@ -39,19 +40,43 @@ public class ObjectPooling : MonoBehaviour
         Destroy(pooledObj.gameObject);
     }
 
-    private void Update()
+    // test spawn e despawn enemies
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.F))
+    //    {
+    //        EnemyController enemyObj = _objPool.Get();
+    //        enemyObj.transform.SetPositionAndRotation(new Vector3(Random.Range(0, 20), Random.Range(0, 20)), Quaternion.identity);
+
+    //    }
+
+    //    if (Input.GetKeyDown(KeyCode.S))
+    //    {
+    //        EnemyController enemyObj = FindFirstObjectByType<EnemyController>();
+    //        enemyObj.Deactive();
+    //    }
+    //}
+
+    //Disattiva tutti i gameobjects con la componente EnemyController che trova in scena
+    public void DeactiveEnemy()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        EnemyController[] enemyObj = GameObject.FindObjectsOfType<EnemyController>();
+
+        foreach(EnemyController enemy in enemyObj)
+        {
+            enemy.Deactive();
+        }
+        
+    }
+
+    //Spawna tutti i Gameobjects che si trovano nella pool
+    public void ActivateEnemy()
+    {
+        for(int i=0; i<=_poolCapacity; i++)
         {
             EnemyController enemyObj = _objPool.Get();
+            //settare la posizione random nelle dimensioni della mappa
             enemyObj.transform.SetPositionAndRotation(new Vector3(Random.Range(0, 20), Random.Range(0, 20)), Quaternion.identity);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            EnemyController enemyObj = FindFirstObjectByType<EnemyController>();
-            enemyObj.Deactive();
         }
     }
 }
