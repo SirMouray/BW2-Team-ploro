@@ -1,26 +1,26 @@
-using System.Collections;
+using System;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class Maps : MonoBehaviour
 {
-    [SerializeField] private bool _isDeactive = false;
-    private IObjectPool<Maps> _objPool;
-    public IObjectPool<Maps> ObjPool { set => _objPool = value; }
+    [SerializeField] private GameObject[] mapsArr;
+    [SerializeField] private Transform[] mapsSpawner;
 
-    IEnumerator DeactiveRoutine()
+    private int arrIndex;
+    private int indexDespawn;
+
+    public void OnEnterBehaviour()
     {
-        //yield return new WaitForSeconds(delay);
-        yield return new WaitUntil(() => _isDeactive);
-        // resettare tutta la mappa
-        _objPool.Release(this);
-        _isDeactive = false;
+        arrIndex = (arrIndex + 1) % mapsSpawner.Length;
+        GameObject maps = mapsArr[arrIndex];
+        maps.SetActive(true);
+        maps.transform.SetPositionAndRotation(new Vector3(mapsSpawner[arrIndex].position.x, mapsSpawner[arrIndex].position.y), Quaternion.identity);
     }
 
-    public void Deactive()
+    public void OnExitBehaviour()
     {
-        StartCoroutine(DeactiveRoutine());
+        indexDespawn = (arrIndex - 1 + mapsArr.Length) % mapsArr.Length;
+        GameObject mapToDespawn = mapsArr[indexDespawn];
+        mapToDespawn.SetActive(false);
     }
-
-    
 }
