@@ -23,6 +23,10 @@ public class PlayerDamageHandler : MonoBehaviour
         //audio
         //animazione
         DisablePlayer();
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.SaveFile();
+
         StartCoroutine(DeathSequence());
     }
 

@@ -21,6 +21,12 @@ public class HealthSystem : MonoBehaviour, IDamageable
             SetHp(maxHealth);
     }
 
+    public void SetShieldStatus(bool status) => isShielded = status;
+
+    public int GetMaxHp() => maxHealth;
+
+    public void AddMaxHp(int hp) => maxHealth += hp;
+
     private void SetHp(int hp)
     {
         currentHealth = Mathf.Clamp(hp, minHealth, maxHealth);
@@ -28,12 +34,6 @@ public class HealthSystem : MonoBehaviour, IDamageable
 
         Debug.Log($"{gameObject.name} ha {currentHealth} hp");
     }
-
-    public void SetShieldStatus(bool status) => isShielded = status;
-
-    public int GetMaxHp() => maxHealth;
-
-    public void AddMaxHp(int hp) => maxHealth += hp;
 
     public void TakeDamage(int damage)
     {

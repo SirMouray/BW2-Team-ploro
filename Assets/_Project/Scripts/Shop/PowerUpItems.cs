@@ -8,7 +8,7 @@ public class PowerUpItems : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerInventory inventory;
     [SerializeField] private ShopManager shopManager;
-    [SerializeField] private Button button;
+
 
     [Header("HealthSystem")]
     [SerializeField] private int hpBoost = 10;
@@ -36,14 +36,10 @@ public class PowerUpItems : MonoBehaviour
         if (healthSystem == null || shopManager == null)
             return;
 
-        if (!shopManager.CanBuy())
-        {
-            button.interactable = false;
-            return;
-        }
-
         healthSystem.AddMaxHp(hpBoost);
-        shopManager.IncreaseCurrentBuy();
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.data.HealthUp_count++;
     }
 
     public void Shield()
@@ -51,14 +47,10 @@ public class PowerUpItems : MonoBehaviour
         if (healthSystem == null || shopManager == null)
             return;
 
-        if (!shopManager.CanBuy())
-        {
-            button.interactable = false;
-            return;
-        }
-
         healthSystem.SetShieldStatus(true);
-        shopManager.IncreaseCurrentBuy();
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.data.Shield_count++;
     }
 
     public void EnableDoubleJump()
@@ -66,14 +58,10 @@ public class PowerUpItems : MonoBehaviour
         if (playerController == null || shopManager == null)
             return;
 
-        if (!shopManager.CanBuy())
-        {
-            button.interactable = false;
-            return;
-        }
-
         playerController.SetDoubleJump(true);
-        shopManager.IncreaseCurrentBuy();
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.data.EnableDoubleJump_purchased = true;
     }
 
     public void SpeedBoost()
@@ -81,14 +69,10 @@ public class PowerUpItems : MonoBehaviour
         if (playerController == null || shopManager == null)
             return;
 
-        if (!shopManager.CanBuy())
-        {
-            button.interactable = false;
-            return;
-        }
-
         playerController.SetSpeedMultiplier(SpeedBoostMultiplier);
-        shopManager.IncreaseCurrentBuy();
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.data.SpeedBoost_count++;
     }
 
     public void DoubleCoin()
@@ -96,13 +80,9 @@ public class PowerUpItems : MonoBehaviour
         if (inventory == null || shopManager == null)
             return;
 
-        if (!shopManager.CanBuy())
-        {
-            button.interactable = false;
-            return;
-        }
-
         inventory.SetDoubleCoin(true);
-        shopManager.IncreaseCurrentBuy();
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.data.DoubleCoin_purchased = true;
     }
 }
