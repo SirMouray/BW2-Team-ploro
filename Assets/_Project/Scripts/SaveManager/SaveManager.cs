@@ -23,6 +23,8 @@ public class SaveManager : MonoBehaviour
 
         if (File.Exists(savePath))
             LoadFile();
+        else
+            data = new DataContainer(); //se il file non esiste resta null, allora creiamo un data in awake
     }
 
     public void SaveFile()

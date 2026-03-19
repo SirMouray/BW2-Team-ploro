@@ -9,6 +9,7 @@ public class ShopSlot : MonoBehaviour
     [SerializeField] private TextMeshPro nameText;
     [SerializeField] private TextMeshPro priceText;
     [SerializeField] private ShopManager shopManager;
+    [SerializeField] private Button button;
     private int price;
 
     private void Awake()
@@ -24,11 +25,24 @@ public class ShopSlot : MonoBehaviour
         nameText.SetText(item.name);
         this.price = price;
         priceText.SetText(price.ToString());
+
+        RefreshButton();
     }
 
     public void OnButtonClick()
     {
         if (shopManager != null)
+        {
             shopManager.TryBuyItem(powerUp, price);
+            RefreshButton();
+        }
+    }
+
+    public void RefreshButton()
+    {
+        if (button != null && !powerUp.CanBuy())
+        {
+            button.interactable = false;
+        }
     }
 }
