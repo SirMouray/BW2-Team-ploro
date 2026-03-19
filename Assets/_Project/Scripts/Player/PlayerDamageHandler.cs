@@ -14,14 +14,14 @@ public class PlayerDamageHandler : MonoBehaviour
 
     public void HandleDamage()
     {
-        //audio
-        //animazione
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFXSound("PlayerDamaged");
     }
 
     public void HandleDeath()
     {
-        //audio
-        //animazione
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFXSound("PlayerDeath");
         DisablePlayer();
 
         if (SaveManager.Instance != null)

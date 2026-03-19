@@ -24,13 +24,19 @@ public class EnemyDamageHandler : MonoBehaviour
 
     public void HandleDamage()
     {
-        //audio
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFXSound("BulletImpact");
+
         //animazione
     }
 
     public void HandleDeath()
     {
         inventory.AddCoin(coinValue);
+
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFXSound("EnemyDeath");
+
         //animazione
         GetComponent<Collider>().enabled = false;
         gameObject.SetActive(false);
