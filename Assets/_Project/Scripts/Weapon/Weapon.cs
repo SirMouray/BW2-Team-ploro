@@ -9,6 +9,9 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFXSound("Shoot");
+
         Ray ray = _camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         Debug.DrawLine(ray.origin, ray.direction * _weaponInfo._range, Color.red);
         RaycastHit hit;
@@ -21,7 +24,6 @@ public class Weapon : MonoBehaviour
                 life.TakeDamage(_weaponInfo._damage);
                 Instantiate(_impactParticleSystem[1], hit.point, Quaternion.LookRotation(hit.normal));
             }
-                
         }
     }
 
