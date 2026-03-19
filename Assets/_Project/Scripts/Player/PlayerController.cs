@@ -78,8 +78,8 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if (groundCheck.CheckIsGrounded() && verticalVelocity < 0f)
-            verticalVelocity = -2f; //se e' a terra mantienilo tale con valore minimo X (non si usa -9.81f perche' potrebbe causare compenetrazioni con il terreno)
+        if (groundCheck.CheckIsGrounded() && verticalVelocity < Mathf.Epsilon)
+            verticalVelocity = 0; //se e' a terra mantienilo tale con valore minimo X (non si usa -9.81f perche' potrebbe causare compenetrazioni con il terreno)
         else                        //altrimenti applica la gravita' con fall multiplier se sta cadendo
         {
             float appliedGravity = (verticalVelocity < 0f) ? gravity * fallMultiplier : gravity;
@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && groundCheck.CheckIsGrounded())
         {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
             if (Input.GetButtonDown("Jump") && canDoubleJump && jumpCounter <= 1)
             {
                 verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
