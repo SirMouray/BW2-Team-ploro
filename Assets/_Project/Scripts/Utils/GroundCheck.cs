@@ -22,7 +22,7 @@ public class GroundCheck : MonoBehaviour
         Gizmos.DrawWireSphere(groundChecker.position, groundDistance);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (groundChecker == null) return;
         IsGrounded = Physics.CheckSphere(groundChecker.position, groundDistance, terrain, QueryTriggerInteraction.Ignore);
