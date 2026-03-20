@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -20,6 +18,9 @@ public class InteractionManager : MonoBehaviour
 
     private void CheckInteraction()
     {
+        if (textInteraction == null)
+            return;
+
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayer))
@@ -36,6 +37,5 @@ public class InteractionManager : MonoBehaviour
         }
         interactable = null;
         textInteraction.gameObject.SetActive(false);
-
     }
 }

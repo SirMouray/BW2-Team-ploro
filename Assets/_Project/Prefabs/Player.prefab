@@ -98,7 +98,7 @@ Transform:
   m_GameObject: {fileID: 1950954589069597352}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.527, z: 0}
+  m_LocalPosition: {x: 0, y: -0.516, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 599359077200762186}
   - component: {fileID: 7037701799551060561}
+  - component: {fileID: 5260339526896214835}
   - component: {fileID: 6323809777215090571}
   - component: {fileID: 8075823011665069740}
   - component: {fileID: 1532114996116598572}
@@ -188,6 +189,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
+--- !u!136 &5260339526896214835
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029018889525370605}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6323809777215090571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,11 +227,11 @@ MonoBehaviour:
   rb: {fileID: 7037701799551060561}
   groundCheck: {fileID: 2449953143685859818}
   mainCamera: {fileID: 0}
-  speed: 5
+  speed: 10
   speedMultiplier: 2
   jumpHeight: 2
   gravity: -9.8
-  fallMultiplier: 2.5
+  fallMultiplier: 2
 --- !u!114 &8075823011665069740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,10 +262,34 @@ MonoBehaviour:
   fullHpOnStart: 1
   onHpChange:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6511753977057695228}
+        m_TargetAssemblyTypeName: PlayerDamageHandler, Assembly-CSharp
+        m_MethodName: HandleDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6511753977057695228}
+        m_TargetAssemblyTypeName: PlayerDamageHandler, Assembly-CSharp
+        m_MethodName: HandleDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6511753977057695228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,7 +382,6 @@ GameObject:
   - component: {fileID: 9077682529066725212}
   - component: {fileID: 1590407585369324021}
   - component: {fileID: 7535615261292232742}
-  - component: {fileID: 1862925240932658109}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -407,29 +454,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1862925240932658109
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5142607227468680334}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8247871478388838101
 GameObject:
   m_ObjectHideFlags: 0

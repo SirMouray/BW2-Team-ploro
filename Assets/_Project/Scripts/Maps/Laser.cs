@@ -35,7 +35,9 @@ public class Laser : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<IDamageable>(out var life))
+        if (other.TryGetComponent<HealthSystem>(out var life))
+        {
             life.TakeDamage(damage);
+        }
     }
 }

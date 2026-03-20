@@ -10,8 +10,9 @@ public class EnemyDamageHandler : MonoBehaviour
     {
         if (healthSystem == null)
             healthSystem = GetComponent<HealthSystem>();
+
         if (inventory == null)
-            inventory = GetComponent<PlayerInventory>();
+            inventory = GameObject.FindWithTag("Player").GetComponent<PlayerInventory>();
     }
 
     private void OnEnable()
@@ -26,8 +27,6 @@ public class EnemyDamageHandler : MonoBehaviour
     {
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySFXSound("BulletImpact");
-
-        //animazione
     }
 
     public void HandleDeath()
@@ -36,9 +35,5 @@ public class EnemyDamageHandler : MonoBehaviour
 
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySFXSound("EnemyDeath");
-
-        //animazione
-        GetComponent<Collider>().enabled = false;
-        gameObject.SetActive(false);
     }
 }

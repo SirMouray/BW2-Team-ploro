@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf62a0360fd11d48b3a91e03a897541, type: 3}
   m_Name: EnemyKamikaze
   m_EditorClassIdentifier: 
-  _triggerDistance: 10
+  _triggerDistance: 100
   _speed: 5
   _attackSpeed: 10
+  _damage: 10

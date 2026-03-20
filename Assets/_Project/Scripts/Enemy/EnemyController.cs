@@ -6,23 +6,29 @@ public abstract class EnemyController : MonoBehaviour
 {
     [SerializeField] protected SO_Enemies _enemyInfo;
 
-
     protected EnemyState.State _currentState;
     protected NavMeshAgent _agent;
     protected Transform _player;
     protected HealthSystem _healthSystem;
 
     private IObjectPool<EnemyController> _objPool;
-    public IObjectPool<EnemyController> ObjPool { set => _objPool = value; }
+    //public IObjectPool<EnemyController> ObjPool { set => _objPool = value; }
 
+    public void SetObjPool(IObjectPool<EnemyController> pool)
+    {
+        _objPool = pool;
+    }
 
-
-    protected virtual void Start()
+    private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _player = GameObject.FindGameObjectWithTag("Player").transform;
-        _agent.speed = _enemyInfo._speed;
         _healthSystem = GetComponent<HealthSystem>();
+    }
+
+    protected virtual void Start()
+    {
+        _agent.speed = _enemyInfo._speed;
     }
     protected bool CanSeePlayer()
     {

@@ -74,8 +74,10 @@ GameObject:
   - component: {fileID: 1598576829761481286}
   - component: {fileID: 4861210460890388773}
   - component: {fileID: 7440693691845294473}
-  - component: {fileID: 8071026131917006165}
   - component: {fileID: 5748234552074636638}
+  - component: {fileID: 8071026131917006165}
+  - component: {fileID: 9109927314242719740}
+  - component: {fileID: 5854227822673803365}
   m_Layer: 0
   m_Name: EnemyKamikaze
   m_TagString: Untagged
@@ -172,23 +174,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8071026131917006165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5257349442509983245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc71dbd35e99ab04ebecf5a1c72637e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyInfo: {fileID: 11400000, guid: 2d67bef7f24c2a844a6b4d9bcbee098a, type: 2}
-  _patrolPoints:
-  - {fileID: 7573826601344970922}
-  - {fileID: 630429593806490301}
-  - {fileID: 3064740157063953441}
 --- !u!195 &5748234552074636638
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -211,6 +196,83 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8071026131917006165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257349442509983245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc71dbd35e99ab04ebecf5a1c72637e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyInfo: {fileID: 11400000, guid: 2d67bef7f24c2a844a6b4d9bcbee098a, type: 2}
+  _patrolPoints:
+  - {fileID: 7573826601344970922}
+  - {fileID: 630429593806490301}
+  - {fileID: 3064740157063953441}
+--- !u!114 &9109927314242719740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257349442509983245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62dc0ac25b6cd1640b4d8ade17fa07f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  minHealth: 0
+  fullHpOnStart: 1
+  onHpChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5854227822673803365}
+        m_TargetAssemblyTypeName: EnemyDamageHandler, Assembly-CSharp
+        m_MethodName: HandleDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5854227822673803365}
+        m_TargetAssemblyTypeName: EnemyDamageHandler, Assembly-CSharp
+        m_MethodName: HandleDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5854227822673803365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257349442509983245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940f23d7fb3eef5458f5688e23e14750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSystem: {fileID: 9109927314242719740}
+  inventory: {fileID: 0}
+  coinValue: 1
 --- !u!1 &8933206424608660024
 GameObject:
   m_ObjectHideFlags: 0

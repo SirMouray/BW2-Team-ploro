@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   _rateOfFire: 0.4
-  _damage: 2
-  _range: 10
+  _damage: 20
+  _range: 100

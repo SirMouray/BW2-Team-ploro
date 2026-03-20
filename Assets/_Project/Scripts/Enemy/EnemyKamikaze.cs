@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyKamikaze : EnemyController
@@ -12,6 +10,10 @@ public class EnemyKamikaze : EnemyController
     {
         base.Start();
         _currentState = EnemyState.State.Patrol;
+
+        if (!_agent.isOnNavMesh)
+            Debug.Log("qualsiasicosa");
+
         _agent.SetDestination(_patrolPoints[_arrIndex].position);
     }
     protected override void Attack()

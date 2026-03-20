@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Pool;
 
 public class ObjectPooling : MonoBehaviour
 {
     [SerializeField] private EnemyController _objPrefab;
+    [SerializeField] private Transform[] spawnpoints;
     private IObjectPool<EnemyController> _objPool;
     private bool _collectionCheck;
     private int _poolCapacity = 20;
@@ -21,7 +21,7 @@ public class ObjectPooling : MonoBehaviour
         EnemyController obj = Instantiate(_objPrefab);
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(transform);
-        obj.ObjPool = _objPool;
+        obj.SetObjPool(_objPool);
         return obj;
     }
 
@@ -38,6 +38,14 @@ public class ObjectPooling : MonoBehaviour
     private void OnDestroyPooledObj(EnemyController pooledObj)
     {
         Destroy(pooledObj.gameObject);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ActivateEnemy();
+        }
     }
 
     // test spawn e despawn enemies
@@ -62,21 +70,20 @@ public class ObjectPooling : MonoBehaviour
     {
         EnemyController[] enemyObj = GameObject.FindObjectsOfType<EnemyController>();
 
-        foreach(EnemyController enemy in enemyObj)
+        foreach (EnemyController enemy in enemyObj)
         {
             enemy.Deactive();
         }
-        
     }
 
     //Spawna tutti i Gameobjects che si trovano nella pool
     public void ActivateEnemy()
     {
-        for(int i=0; i<=_poolCapacity; i++)
+        for (int i = 0; i <= _poolCapacity && i < spawnpoints.Length; i++)
         {
             EnemyController enemyObj = _objPool.Get();
             //settare la posizione random nelle dimensioni della mappa
-            enemyObj.transform.SetPositionAndRotation(new Vector3(Random.Range(0, 20), Random.Range(0, 20)), Quaternion.identity);
+            enemyObj.GetComponent<NavMeshAgent>().Warp(spawnpoints[i].position);
         }
     }
 }
