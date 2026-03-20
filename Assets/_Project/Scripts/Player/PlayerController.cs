@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if (groundCheck.CheckIsGrounded() && verticalVelocity < Mathf.Epsilon)
+        if (groundCheck.CheckIsGrounded() && verticalVelocity < 0.25f)
             verticalVelocity = 0; //se e' a terra mantienilo tale con valore minimo X (non si usa -9.81f perche' potrebbe causare compenetrazioni con il terreno)
         else                        //altrimenti applica la gravita' con fall multiplier se sta cadendo
         {
