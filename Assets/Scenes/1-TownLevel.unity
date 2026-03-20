@@ -185,6 +185,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4563009547290875218, guid: a401caf2b1d0a404aa7309fa002d2353,
+        type: 3}
+      propertyPath: textInteraction
+      value: 
+      objectReference: {fileID: 1480834053}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -872,7 +877,8 @@ GameObject:
   - component: {fileID: 425764913}
   - component: {fileID: 425764912}
   - component: {fileID: 425764911}
-  m_Layer: 0
+  - component: {fileID: 425764915}
+  m_Layer: 6
   m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,6 +972,19 @@ Transform:
   - {fileID: 1336310577}
   m_Father: {fileID: 1869220774}
   m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+--- !u!114 &425764915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425764910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375fe69b4165b384da8fcc37e284c14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopCanvas: {fileID: 0}
 --- !u!1 &463931071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,6 +1694,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431009389}
   m_CullTransparentMesh: 1
+--- !u!114 &1480834053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1674236405259880527, guid: b31d03079c26aeb41a0633ff980a468e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1835130660}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1583130587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,6 +2110,7 @@ GameObject:
   - component: {fileID: 2074967052}
   - component: {fileID: 2074967051}
   - component: {fileID: 2074967054}
+  - component: {fileID: 2074967055}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -2172,6 +2204,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1.4487152}
   m_Center: {x: 0, y: 0, z: -0.22435762}
+--- !u!114 &2074967055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074967049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02009880d2f6a7248a3ce77dbd49a089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

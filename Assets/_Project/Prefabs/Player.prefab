@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 8075823011665069740}
   - component: {fileID: 1532114996116598572}
   - component: {fileID: 6511753977057695228}
+  - component: {fileID: 4563009547290875218}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -202,7 +203,7 @@ MonoBehaviour:
   rb: {fileID: 7037701799551060561}
   groundCheck: {fileID: 2449953143685859818}
   mainCamera: {fileID: 0}
-  speed: 2
+  speed: 5
   speedMultiplier: 2
   jumpHeight: 2
   gravity: -9.8
@@ -255,6 +256,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameoverUI: {fileID: 0}
   healthSystem: {fileID: 1532114996116598572}
+--- !u!114 &4563009547290875218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029018889525370605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c3a9de3ffe5684084a6ee7343e0527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 5
+  textInteraction: {fileID: 0}
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &4774212192152632459
 GameObject:
   m_ObjectHideFlags: 0

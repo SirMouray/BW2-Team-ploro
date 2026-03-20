@@ -22,15 +22,20 @@ public class InteractionManager : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, interactionDistance, interactionLayer))
+        if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayer))
         {
             IInteractable obj = hit.collider.GetComponent<IInteractable>();
 
-            if(obj == null )
+            if (obj != null)
+            {
+                interactable = obj;
+                textInteraction.text = interactable.InteractionText();
+                textInteraction.gameObject.SetActive(true);
                 return;
-
-            interactable = obj;
-            textInteraction.text = interactable.InteractionText();
+            }
         }
+        interactable = null;
+        textInteraction.gameObject.SetActive(false);
+
     }
 }

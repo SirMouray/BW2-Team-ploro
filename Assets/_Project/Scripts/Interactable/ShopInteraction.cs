@@ -10,10 +10,17 @@ public class ShopInteraction : MonoBehaviour, IInteractable
         if (shopCanvas == null)
             return;
         shopCanvas.gameObject.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public string InteractionText()
     {
         return "Press F to open the shop";
+    }
+
+    public void OnEscButton()
+    {
+        shopCanvas.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 }
