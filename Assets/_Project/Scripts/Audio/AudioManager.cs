@@ -7,9 +7,11 @@ public class AudioManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private List<Sound> sfxSounds;
+    [SerializeField] private AudioClip backgroundClip;
 
     [Header("Sources")]
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource backgroundSource;
 
     private void Awake()
     {
@@ -21,6 +23,18 @@ public class AudioManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        PlayBackground();
+    }
+
+    private void PlayBackground()
+    {
+        if (backgroundClip != null && backgroundSource != null)
+        {
+            backgroundSource.clip = backgroundClip;
+            backgroundSource.Play();
+            backgroundSource.loop = true;
+        }
     }
 
     public void PlaySFXSound(string soundToPlay)
